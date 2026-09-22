@@ -32,7 +32,7 @@
 
 ## Etapa actual
 
-Paso 1 de la secuencia maestra (página de ventas). FICHA-MODELO.md y FICHA-AVATAR.md aprobadas. FICHA-ARTE.md lista — pendiente OK del usuario sobre la identidad visual antes de tematizar tokens.css y escribir el copy marcado.
+Paso 1 de la secuencia maestra (página de ventas). FICHA-MODELO.md y FICHA-AVATAR.md aprobadas. Protocolo A/B/C construido: [direcciones-abc.html](direcciones-abc.html) (screenshot en [docs/revisiones/direcciones-abc.png](docs/revisiones/direcciones-abc.png)) — pendiente que el usuario elija A/B/C/combinar antes de fijar FICHA-ARTE.md definitiva, hacer el tour de la app y tematizar tokens.css.
 
 ## Registro anti-repetición (para no reciclar en el próximo proyecto de este usuario)
 - Nombre elegido: SleepPayoff.
