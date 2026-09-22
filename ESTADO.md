@@ -32,11 +32,12 @@
 
 ## Etapa actual
 
-Idea validada y guardada. Próximo paso: arrancar la secuencia maestra (docs/sistema/SECUENCIA-MAESTRA-CONSTRUCCION.md) — página de ventas → onboarding → paywall → login/auth → app interna → servicios externos → backoffice.
+Paso 1 de la secuencia maestra (página de ventas). FICHA-MODELO.md y FICHA-AVATAR.md completas — pendiente confirmación del usuario sobre el avatar antes de escribir el copy de la landing.
 
 ## Decisiones tomadas (con evidencia del SO)
 
 - **App modelo elegida: RISE: Sleep Tracker (Rise Science).** Revenue probado por 2 señales independientes (Sensor Tower ~$400k/mes marzo 2026 + top grossing #50 Health&Fitness US oct 2024). Plano completo, quejas y ángulo de diferenciación en [FICHA-MODELO.md](FICHA-MODELO.md). Nuestro eje: registro 100% manual (sin depender de wearables — su queja #1) + enfoque en productividad laboral para freelancers, en vez de salud general.
+- **Avatar aprobado (borrador): Carlos, 32, freelancer/developer remoto.** Ficha completa con 13 frases VoC, dolores/deseos en 3 niveles, 6 objeciones con respuesta/destino, diagnóstico de consciencia (consciente del problema, soluciones ya probadas fallaron) y sofisticación (mercado quemado — ángulo del hero: mecanismo al frente, no promesa genérica). Ver [FICHA-AVATAR.md](FICHA-AVATAR.md).
 
 ## Problemas conocidos
 
