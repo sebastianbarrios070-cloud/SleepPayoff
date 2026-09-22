@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="es" data-kit="abc-v2">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tour de la app — SleepPayoff (Opción A · Deuda Clara)</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background:
+      radial-gradient(1100px 520px at 12% -6%, #f7f7f9, transparent 62%),
+      radial-gradient(900px 460px at 92% 4%, #e2e2e9, transparent 58%),
+      linear-gradient(180deg, #ededf0, #e4e4e9);
+    color: #1c1c1f;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    padding: 32px 20px 64px;
+  }
+  .cabecera { max-width: 1180px; margin: 0 auto 12px; }
+  .cabecera h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; }
+  .cabecera p.sub { margin-top: 6px; font-size: 14px; color: #55555c; max-width: 70ch; }
+  .aviso-fuentes { max-width: 1180px; margin: 10px auto 28px; font-size: 12.5px; color: #6a6a72; }
+
+  .vistas { max-width: 1180px; margin: 0 auto; display: grid; gap: 32px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .vista { display: flex; flex-direction: column; gap: 10px; }
+  .rotulo {
+    text-align: center; font-size: 13px; font-weight: 700; color: #3a3a40;
+  }
+
+  :root {
+    --bg: #0a0a10;
+    --surface: #16161f;
+    --text-1: #f5f5f7;
+    --text-2: #9a9aa5;
+    --accent: #ff7a45;
+    --accent2: #7c4dff;
+    --radius-card: 16px;
+    --radius-btn: 12px;
+    --font-display: 'Space Grotesk', monospace;
+    --font-body: 'Inter', monospace;
+    --shadow-tinta: 124 77 255;
+  }
+
+  .telefono {
+    width: 300px; margin: 0 auto;
+    aspect-ratio: 9 / 19.5;
+    border: 10px solid #101014;
+    border-radius: 46px;
+    box-shadow: 0 24px 60px rgb(20 18 24 / 0.28);
+    overflow: hidden;
+    position: relative;
+    display: flex; flex-direction: column;
+    background: var(--bg);
+  }
+  .statusbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px 6px; font-size: 12.5px; font-weight: 600;
+    font-variant-numeric: tabular-nums; color: var(--text-1);
+  }
+  .statusbar .der { display: flex; align-items: center; gap: 5px; }
+  .statusbar svg { display: block; }
+  .home-indicator {
+    position: absolute; bottom: 7px; left: 50%; transform: translateX(-50%);
+    width: 116px; height: 5px; border-radius: 999px; opacity: 0.85; background: var(--text-1);
+  }
+  .pantalla { flex: 1; display: flex; flex-direction: column; overflow: hidden;
+              font-family: var(--font-body); color: var(--text-1); padding: 0 18px; }
+
+  .chip-icono {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; flex-shrink: 0;
+  }
+  .cta {
+    display: flex; align-items: center; justify-content: center;
+    height: 48px; font-size: 15px; font-weight: 600; letter-spacing: 0.01em;
+    border-radius: var(--radius-btn);
+    background: linear-gradient(90deg, var(--accent), var(--accent2)); color: #fff;
+    box-shadow: 0 8px 22px rgb(var(--shadow-tinta) / 0.35);
+  }
+
+  .tabbar {
+    display: flex; align-items: stretch; justify-content: space-around;
+    margin: 12px -18px 0; padding: 8px 8px 16px;
+    border-top: 1px solid color-mix(in oklab, var(--text-2) 18%, transparent);
+    background: color-mix(in oklab, var(--surface) 88%, transparent);
+  }
+  .tabbar a {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    font-size: 9.5px; font-weight: 600; color: var(--text-2); text-decoration: none;
+  }
+  .tabbar .tab-chip {
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; height: 26px; border-radius: 9px;
+  }
+  .tabbar a.activa { color: var(--accent); }
+  .tabbar a.activa .tab-chip { background: color-mix(in oklab, var(--accent) 14%, transparent); }
+
+  .horizonte {
+    margin-top: 10px; height: 2px; border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  /* ── Vista 1: M0 / Hoy ── */
+  .saludo { margin-top: 10px; font-size: 12px; font-weight: 600; color: var(--text-2); }
+  h3.titulo { font-family: var(--font-display); font-size: 24px; font-weight: 700;
+    line-height: 1.12; letter-spacing: -0.01em; margin-top: 2px; }
+  .heroe {
+    margin-top: 14px; border-radius: var(--radius-card);
+    border: 1.5px solid transparent;
+    background: linear-gradient(var(--surface), var(--surface)) padding-box,
+      linear-gradient(135deg, var(--accent), var(--accent2)) border-box;
+    box-shadow: 0 10px 26px -10px rgb(var(--shadow-tinta) / 0.35);
+    padding: 16px;
+  }
+  .heroe .label { font-size: 11.5px; font-weight: 600; color: var(--text-2); }
+  .heroe .dato {
+    font-family: var(--font-display); font-size: 42px; font-weight: 700;
+    line-height: 1.05; font-variant-numeric: tabular-nums;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .heroe .dato small { font-size: 15px; font-weight: 600; color: var(--text-2);
+    background: none; -webkit-background-clip: initial; background-clip: initial; }
+  .heroe .insight { margin-top: 4px; font-size: 12.5px; color: var(--accent); font-weight: 600; }
+  .card {
+    margin-top: 10px; background: var(--surface); border-radius: var(--radius-card);
+    border: 1px solid color-mix(in oklab, var(--text-2) 22%, transparent);
+    padding: 12px 14px; display: flex; gap: 12px; align-items: flex-start;
+  }
+  .card .chip-icono { border-radius: var(--radius-btn);
+    background: color-mix(in oklab, var(--accent) 14%, transparent);
+    border: 1px solid color-mix(in oklab, var(--accent) 28%, transparent); }
+  .card h4 { font-size: 14px; font-weight: 700; }
+  .card p { margin-top: 2px; font-size: 12.5px; color: var(--text-2); line-height: 1.45; }
+
+  /* ── Vista 2: Onboarding ── */
+  .barra-progreso { margin-top: 14px; height: 4px; border-radius: 999px;
+    background: color-mix(in oklab, var(--text-2) 20%, transparent); overflow: hidden; }
+  .barra-progreso i { display: block; height: 100%; width: 40%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+  .paso-label { margin-top: 8px; font-size: 11px; font-weight: 600; color: var(--text-2); }
+  .pregunta { font-family: var(--font-display); font-size: 21px; font-weight: 700;
+    line-height: 1.2; margin-top: 16px; }
+  .opciones-quiz { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
+  .opcion-quiz {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--surface); border-radius: var(--radius-card);
+    border: 1.5px solid color-mix(in oklab, var(--text-2) 20%, transparent);
+    padding: 13px 14px; font-size: 14px; font-weight: 600;
+  }
+  .opcion-quiz.activa {
+    border-color: transparent;
+    background: linear-gradient(var(--surface), var(--surface)) padding-box,
+      linear-gradient(135deg, var(--accent), var(--accent2)) border-box;
+    color: var(--text-1);
+  }
+  .opcion-quiz .marca {
+    width: 20px; height: 20px; border-radius: 999px; flex-shrink: 0;
+    border: 2px solid color-mix(in oklab, var(--text-2) 45%, transparent);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .opcion-quiz.activa .marca { border-color: var(--accent); background: var(--accent); }
+
+  /* ── Vista 3: Paywall ── */
+  .paywall-badge {
+    margin-top: 14px; align-self: center;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--accent);
+    background: color-mix(in oklab, var(--accent) 12%, transparent);
+    border: 1px solid color-mix(in oklab, var(--accent) 28%, transparent);
+    border-radius: 999px; padding: 5px 12px;
+  }
+  .paywall-titulo { font-family: var(--font-display); font-size: 22px; font-weight: 700;
+    text-align: center; margin-top: 12px; line-height: 1.2; }
+  .paywall-sub { font-size: 12.5px; color: var(--text-2); text-align: center; margin-top: 6px; }
+  .planes { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .plan {
+    border-radius: var(--radius-card); padding: 12px 14px;
+    background: var(--surface); border: 1.5px solid color-mix(in oklab, var(--text-2) 20%, transparent);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .plan.recomendado {
+    border-color: transparent; position: relative;
+    background: linear-gradient(var(--surface), var(--surface)) padding-box,
+      linear-gradient(135deg, var(--accent), var(--accent2)) border-box;
+  }
+  .plan.recomendado .badge-ahorro {
+    position: absolute; top: -10px; right: 14px;
+    font-size: 9.5px; font-weight: 700; color: #fff; letter-spacing: 0.03em;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 999px; padding: 3px 9px;
+  }
+  .plan .p-nombre { font-size: 13.5px; font-weight: 700; }
+  .plan .p-detalle { font-size: 11px; color: var(--text-2); margin-top: 2px; }
+  .plan .p-precio { font-family: var(--font-display); font-size: 17px; font-weight: 700; text-align: right; }
+  .plan .p-precio small { font-size: 10.5px; font-weight: 600; color: var(--text-2); display: block; }
+  .features { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .feature { display: flex; align-items: center; gap: 9px; font-size: 12.5px; color: var(--text-1); }
+  .feature svg { flex-shrink: 0; }
+  .paywall-prueba { margin-top: 10px; font-size: 11px; color: var(--text-2); text-align: center; }
+
+  /* ── Vista 4: Mecanismo — Plan de 3 días ── */
+  .dias-plan { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .dia-item {
+    background: var(--surface); border-radius: var(--radius-card);
+    border: 1px solid color-mix(in oklab, var(--text-2) 20%, transparent);
+    padding: 12px 14px; display: flex; align-items: center; gap: 12px;
+  }
+  .dia-item.activo {
+    border: 1.5px solid transparent;
+    background: linear-gradient(var(--surface), var(--surface)) padding-box,
+      linear-gradient(135deg, var(--accent), var(--accent2)) border-box;
+  }
+  .dia-item .dia-num {
+    width: 34px; height: 34px; border-radius: 999px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 13px; font-weight: 700;
+    background: color-mix(in oklab, var(--accent) 16%, transparent); color: var(--accent);
+  }
+  .dia-item.hecho .dia-num { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
+  .dia-item h4 { font-size: 13.5px; font-weight: 700; }
+  .dia-item p { margin-top: 2px; font-size: 11.5px; color: var(--text-2); line-height: 1.4; }
+
+  .pie {
+    max-width: 1180px; margin: 40px auto 0; font-size: 12.5px; color: #6a6a72;
+    border-top: 1px solid #d0d0d6; padding-top: 14px; line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<header class="cabecera">
+  <h1>Tour de tu app — SleepPayoff (Opción A · Deuda Clara)</h1>
+  <p class="sub">
+    Las 4 pantallas clave con el estilo que elegiste ya aplicado: cómo se ve cada día, cómo te
+    pregunta al empezar, dónde eliges tu plan y cómo se ve el mecanismo funcionando.
+  </p>
+</header>
+<p class="aviso-fuentes">
+  Ábrelo con conexión a internet. Mismas fuentes de la comparativa: Space Grotesk (títulos) + Inter (texto).
+</p>
+
+<div class="vistas">
+
+  <!-- ═══════════════ VISTA 1 — M0 / Tu pantalla de cada día ═══════════════ -->
+  <div class="vista">
+    <p class="rotulo">1 · Tu pantalla de cada día</p>
+    <div class="telefono">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span class="der">
+          <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="0.8"/><rect x="4.5" y="5" width="3" height="6" rx="0.8"/><rect x="9" y="3" width="3" height="8" rx="0.8"/><rect x="13.5" y="0.5" width="3" height="10.5" rx="0.8"/></svg>
+          <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M3.8 6.6a6.2 6.2 0 0 1 8.4 0"/><path d="M6.2 9a2.8 2.8 0 0 1 3.6 0"/></svg>
+          <svg width="25" height="12" viewBox="0 0 25 12" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity="0.4"/><rect x="2" y="2" width="15" height="8" rx="1.6" fill="currentColor"/><rect x="22.5" y="3.8" width="2" height="4.4" rx="1" fill="currentColor" opacity="0.4"/></svg>
+        </span>
+      </div>
+      <div class="pantalla">
+        <p class="saludo">Martes 6 de agosto</p>
+        <h3 class="titulo">Buenos días, Carlos</h3>
+        <div class="horizonte" aria-hidden="true"></div>
+        <div class="heroe">
+          <p class="label">Deuda de sueño</p>
+          <p class="dato">6.3 <small>hrs</small></p>
+          <p class="insight">↓ baja a 2.1h si sigues el plan de hoy</p>
+        </div>
+        <div class="card">
+          <span class="chip-icono" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff7a45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <div>
+            <h4>Plan de hoy · 3 pasos</h4>
+            <p>Siesta 20 min a las 14:00 · último café antes de 13:00 · pantallas off 22:30</p>
+          </div>
+        </div>
+        <div class="card">
+          <span class="chip-icono" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff7a45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
+          </span>
+          <div>
+            <h4>Tu energía cae siempre a las 14:00</h4>
+            <p>Detectado en tus últimos 7 días registrados</p>
+          </div>
+        </div>
+        <div class="cta" style="margin-top:auto; margin-bottom:0;">Ver mi hora de desconexión</div>
+        <nav class="tabbar" aria-label="Navegación">
+          <a class="activa" href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></span>Hoy</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></span>Progreso</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 9h18"/></svg></span>Plan</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></span>Perfil</a>
+        </nav>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ VISTA 2 — Onboarding ═══════════════ -->
+  <div class="vista">
+    <p class="rotulo">2 · Así te pregunta al empezar</p>
+    <div class="telefono">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span class="der">
+          <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="0.8"/><rect x="4.5" y="5" width="3" height="6" rx="0.8"/><rect x="9" y="3" width="3" height="8" rx="0.8"/><rect x="13.5" y="0.5" width="3" height="10.5" rx="0.8"/></svg>
+          <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M3.8 6.6a6.2 6.2 0 0 1 8.4 0"/><path d="M6.2 9a2.8 2.8 0 0 1 3.6 0"/></svg>
+          <svg width="25" height="12" viewBox="0 0 25 12" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity="0.4"/><rect x="2" y="2" width="15" height="8" rx="1.6" fill="currentColor"/><rect x="22.5" y="3.8" width="2" height="4.4" rx="1" fill="currentColor" opacity="0.4"/></svg>
+        </span>
+      </div>
+      <div class="pantalla">
+        <div class="barra-progreso"><i></i></div>
+        <p class="paso-label">Pregunta 2 de 5</p>
+        <p class="pregunta">¿A qué hora sueles despertarte entre semana?</p>
+        <div class="opciones-quiz">
+          <div class="opcion-quiz"><span class="marca"></span> Antes de las 6:30</div>
+          <div class="opcion-quiz activa"><span class="marca"></span> Entre 6:30 y 7:30</div>
+          <div class="opcion-quiz"><span class="marca"></span> Entre 7:30 y 9:00</div>
+          <div class="opcion-quiz"><span class="marca"></span> Después de las 9:00</div>
+        </div>
+        <div class="cta" style="margin-top:auto; margin-bottom:0;">Continuar</div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ VISTA 3 — Paywall ═══════════════ -->
+  <div class="vista">
+    <p class="rotulo">3 · Aquí eliges tu plan</p>
+    <div class="telefono">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span class="der">
+          <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="0.8"/><rect x="4.5" y="5" width="3" height="6" rx="0.8"/><rect x="9" y="3" width="3" height="8" rx="0.8"/><rect x="13.5" y="0.5" width="3" height="10.5" rx="0.8"/></svg>
+          <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M3.8 6.6a6.2 6.2 0 0 1 8.4 0"/><path d="M6.2 9a2.8 2.8 0 0 1 3.6 0"/></svg>
+          <svg width="25" height="12" viewBox="0 0 25 12" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity="0.4"/><rect x="2" y="2" width="15" height="8" rx="1.6" fill="currentColor"/><rect x="22.5" y="3.8" width="2" height="4.4" rx="1" fill="currentColor" opacity="0.4"/></svg>
+        </span>
+      </div>
+      <div class="pantalla">
+        <span class="paywall-badge">7 días gratis</span>
+        <p class="paywall-titulo">Tu plan de recuperación te espera</p>
+        <p class="paywall-sub">Cancela cuando quieras, sin preguntas</p>
+        <div class="planes">
+          <div class="plan recomendado">
+            <span class="badge-ahorro">Ahorra 52%</span>
+            <div>
+              <p class="p-nombre">Anual</p>
+              <p class="p-detalle">$39.99/año</p>
+            </div>
+            <div class="p-precio">$3.33<small>/mes</small></div>
+          </div>
+          <div class="plan">
+            <div>
+              <p class="p-nombre">Mensual</p>
+              <p class="p-detalle">Se renueva cada mes</p>
+            </div>
+            <div class="p-precio">$6.99<small>/mes</small></div>
+          </div>
+        </div>
+        <div class="features">
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff7a45" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            Cálculo diario de tu deuda de sueño
+          </div>
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff7a45" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            Plan de recuperación de 3 días
+          </div>
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff7a45" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            Hora exacta de desconexión cada noche
+          </div>
+        </div>
+        <div class="cta" style="margin-top:14px;">Empezar mi prueba gratis</div>
+        <p class="paywall-prueba">Sin cargo hasta el día 8 · cancela cuando quieras</p>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ VISTA 4 — Mecanismo en acción ═══════════════ -->
+  <div class="vista">
+    <p class="rotulo">4 · Tu plan de 3 días funcionando</p>
+    <div class="telefono">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span class="der">
+          <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="0.8"/><rect x="4.5" y="5" width="3" height="6" rx="0.8"/><rect x="9" y="3" width="3" height="8" rx="0.8"/><rect x="13.5" y="0.5" width="3" height="10.5" rx="0.8"/></svg>
+          <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M3.8 6.6a6.2 6.2 0 0 1 8.4 0"/><path d="M6.2 9a2.8 2.8 0 0 1 3.6 0"/></svg>
+          <svg width="25" height="12" viewBox="0 0 25 12" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity="0.4"/><rect x="2" y="2" width="15" height="8" rx="1.6" fill="currentColor"/><rect x="22.5" y="3.8" width="2" height="4.4" rx="1" fill="currentColor" opacity="0.4"/></svg>
+        </span>
+      </div>
+      <div class="pantalla">
+        <p class="saludo">Tu plan de recuperación</p>
+        <h3 class="titulo">Día 2 de 3</h3>
+        <div class="horizonte" aria-hidden="true"></div>
+        <div class="dias-plan">
+          <div class="dia-item hecho">
+            <span class="dia-num">✓</span>
+            <div><h4>Día 1 · completado</h4><p>Dormiste 1.2h más que tu promedio</p></div>
+          </div>
+          <div class="dia-item activo">
+            <span class="dia-num">2</span>
+            <div><h4>Día 2 · hoy</h4><p>Siesta 20 min a las 14:00 · pantallas off 22:30</p></div>
+          </div>
+          <div class="dia-item">
+            <span class="dia-num">3</span>
+            <div><h4>Día 3 · mañana</h4><p>Se ajusta según cómo duermas esta noche</p></div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:14px;">
+          <span class="chip-icono" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff7a45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.6 6.9L22 9.3l-5.4 4.6 1.8 7.1L12 17l-6.4 4 1.8-7.1L2 9.3l7.4-.4Z"/></svg>
+          </span>
+          <div>
+            <h4>Vas 33% más rápido que el promedio</h4>
+            <p>La mayoría paga su deuda completa al día 4</p>
+          </div>
+        </div>
+        <div class="cta" style="margin-top:auto; margin-bottom:0;">Ver mi día 3</div>
+        <nav class="tabbar" aria-label="Navegación">
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></span>Hoy</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></span>Progreso</a>
+          <a class="activa" href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 9h18"/></svg></span>Plan</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></span>Perfil</a>
+        </nav>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="pie">
+  Gates antes de mostrar este tour (54): las 4 vistas comparten el MISMO sistema (tokens, fuentes,
+  radios, materiales de la Opción A elegida) · fuentes verificadas clase por clase (Space Grotesk /
+  Inter, sin caer al fallback monospace) · mockups LLENOS con datos de SleepPayoff, tab bar visible
+  donde aplica · cero emojis (todo ícono SVG inline) · el marcador data-kit="abc-v2" del &lt;html&gt;
+  intacto. Aprobado por el usuario → FICHA-ARTE.md se cierra con esta dirección.
+</footer>
+
+</body>
+</html>

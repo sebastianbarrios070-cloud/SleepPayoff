@@ -42,9 +42,9 @@
 
 ## Trazabilidad y vetos
 - Ruta de diseño: propuesta propia (fusión de líderes, sin referencia del usuario)
-- Protocolo A/B/C: no aplicado — el usuario delegó la decisión explícitamente ("propónmelo tú"); se documenta la fusión completa arriba en su lugar, con fuente por cada préstamo
+- Protocolo A/B/C: opción elegida **A — "Deuda Clara"** · descartadas: B "Recupero" (fusión Fabulous/verde menta/anillo), C "Bitácora" (fusión editorial serif/timeline) · página comparativa: [direcciones-abc.html](direcciones-abc.html) · screenshot: [docs/revisiones/direcciones-abc.png](docs/revisiones/direcciones-abc.png)
 - Réplica fiel: N/A — no hubo referencia-mandato
-- Tour de la app: pendiente — se genera al construir las primeras pantallas (onboarding/paywall), no antes de tener componentes reales
+- Tour de la app: [vista-previa-app.html](vista-previa-app.html) · vistas: M0/Hoy, onboarding (pregunta de quiz), paywall (anual/mensual), mecanismo (plan de 3 días) · screenshot: [docs/revisiones/vista-previa-app.png](docs/revisiones/vista-previa-app.png) · aprobado por el usuario: pendiente (se presenta en este mensaje)
 - Paleta derivada de: RISE (líder de origen, tomada tal cual, doctrina 29) · Dispositivo ownable elegido: línea de horizonte degradé
 - Registro anti-repetición: paleta oscura naranja→violeta + Space Grotesk/Inter — anotado en ESTADO.md, vetado para el próximo proyecto de este usuario
 - Modo (claro/oscuro) DERIVADO por: lógica de color del líder #1 (RISE) + coherencia con el momento de uso del avatar (mañana temprano agotado / noche antes de dormir — el oscuro refuerza el contexto, no es un default estético)

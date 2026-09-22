@@ -32,7 +32,7 @@
 
 ## Etapa actual
 
-Paso 1 de la secuencia maestra (página de ventas). FICHA-MODELO.md y FICHA-AVATAR.md aprobadas. Protocolo A/B/C construido: [direcciones-abc.html](direcciones-abc.html) (screenshot en [docs/revisiones/direcciones-abc.png](docs/revisiones/direcciones-abc.png)) — pendiente que el usuario elija A/B/C/combinar antes de fijar FICHA-ARTE.md definitiva, hacer el tour de la app y tematizar tokens.css.
+Paso 1 de la secuencia maestra (página de ventas). FICHA-MODELO.md y FICHA-AVATAR.md aprobadas. Usuario eligió Opción A "Deuda Clara" en el protocolo A/B/C. Tour de la app construido: [vista-previa-app.html](vista-previa-app.html) — pendiente respuesta del usuario (me encanta / ajustar / repensar) para cerrar FICHA-ARTE.md definitivamente y pasar a tematizar tokens.css + escribir el copy marcado.
 
 ## Registro anti-repetición (para no reciclar en el próximo proyecto de este usuario)
 - Nombre elegido: SleepPayoff.
@@ -47,4 +47,4 @@ Paso 1 de la secuencia maestra (página de ventas). FICHA-MODELO.md y FICHA-AVAT
 ## Problemas conocidos
 
 - FICHA-MODELO.md §6 (ángulos de ads): no se pudieron obtener los 5 ads individuales de Meta Ads Library con fecha de inicio exacta (sin navegador autenticado en esta sesión). Se documentaron datos agregados (formatos, volumen semanal) con fuente y fecha. Revisar con acceso a Meta Ads Library antes de definir los ads propios en la etapa `34-ADQUISICION`.
-- **vista-previa**: `vista-previa-app.html` (EL TOUR DE LA APP de `54`) todavía no existe. Bloqueado a propósito: depende de qué dirección elige el usuario en [direcciones-abc.html](direcciones-abc.html) (pregunta hecha, respuesta pendiente) — construir el tour antes de esa elección sería fabricarla. FICHA-ARTE.md quedó como propuesta preliminar (no definitiva) hasta que el usuario responda; se re-cierra con la opción elegida + el tour aprobado, según manda `54`.
+- ~~**vista-previa**: `vista-previa-app.html` ausente~~ — RESUELTO: usuario eligió Opción A, tour construido ([vista-previa-app.html](vista-previa-app.html), screenshot en docs/revisiones/). FICHA-ARTE.md sigue en estado "pendiente aprobación del tour" hasta que el usuario responda 1/2/3 a la pregunta del tour.
