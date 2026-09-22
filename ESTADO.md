@@ -47,3 +47,4 @@ Paso 1 de la secuencia maestra (página de ventas). FICHA-MODELO.md y FICHA-AVAT
 ## Problemas conocidos
 
 - FICHA-MODELO.md §6 (ángulos de ads): no se pudieron obtener los 5 ads individuales de Meta Ads Library con fecha de inicio exacta (sin navegador autenticado en esta sesión). Se documentaron datos agregados (formatos, volumen semanal) con fuente y fecha. Revisar con acceso a Meta Ads Library antes de definir los ads propios en la etapa `34-ADQUISICION`.
+- **vista-previa**: `vista-previa-app.html` (EL TOUR DE LA APP de `54`) todavía no existe. Bloqueado a propósito: depende de qué dirección elige el usuario en [direcciones-abc.html](direcciones-abc.html) (pregunta hecha, respuesta pendiente) — construir el tour antes de esa elección sería fabricarla. FICHA-ARTE.md quedó como propuesta preliminar (no definitiva) hasta que el usuario responda; se re-cierra con la opción elegida + el tour aprobado, según manda `54`.
