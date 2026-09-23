@@ -17,20 +17,25 @@ import { ResultStep } from '@/components/onboarding/ResultStep';
 import { ConfirmSalir } from '@/components/onboarding/ConfirmSalir';
 
 type Respuestas = {
-  despertar?: string;
+  meta?: string;
   neblina?: string;
   probado?: string;
-  meta?: string;
+  despertar?: string;
+  cafe?: string;
   horasDormidas?: number;
   desconexion?: string;
 };
 
+// Meta primero (perceived fit inmediato — Headspace/Irrational Labs 2026: preguntar
+// duplicó activación), luego dolor, objeción dominante, ancla horaria, café (VoC literal
+// de FICHA-AVATAR), el dato duro, y el compromiso.
 const PASOS = [
-  'despertar',
+  'meta',
   'neblina',
   'reconocimiento1',
   'probado',
-  'meta',
+  'despertar',
+  'cafe',
   'horas',
   'desconexion',
   'reconocimiento2',
@@ -76,19 +81,19 @@ export default function OnboardingPage() {
       />
 
       <AnimatePresence mode="wait">
-        {paso === 'despertar' && (
+        {paso === 'meta' && (
           <ChipStep
-            key="despertar"
-            pregunta="¿A qué hora te despiertas entre semana?"
-            subcopy="Así ajustamos tu plan a tu horario real"
+            key="meta"
+            pregunta="¿Qué te gustaría lograr primero?"
+            subcopy="Tu plan de 3 días se ordena según esto"
             opciones={[
-              { label: 'Antes de las 6:30', icon: AlarmClock },
-              { label: 'Entre 6:30 y 7:30', icon: AlarmClock },
-              { label: 'Entre 7:30 y 9:00', icon: AlarmClock },
-              { label: 'Después de las 9:00', icon: AlarmClock },
+              { label: 'Eliminar la neblina mental en el trabajo', icon: Sparkles },
+              { label: 'Saber a qué hora desconectarme hoy', icon: Moon },
+              { label: 'Dejar de posponer la alarma', icon: AlarmClock },
+              { label: 'Entender qué me pasa', icon: Brain },
             ]}
             onSelect={(v) => {
-              setR((p) => ({ ...p, despertar: v }));
+              setR((p) => ({ ...p, meta: v }));
               avanzar();
             }}
           />
@@ -140,19 +145,36 @@ export default function OnboardingPage() {
           />
         )}
 
-        {paso === 'meta' && (
+        {paso === 'despertar' && (
           <ChipStep
-            key="meta"
-            pregunta="¿Qué te gustaría lograr primero?"
-            subcopy="Tu plan de 3 días se ordena según esto"
+            key="despertar"
+            pregunta="¿A qué hora te despiertas entre semana?"
+            subcopy="Así ajustamos tu plan a tu horario real"
             opciones={[
-              { label: 'Dejar de depender del café', icon: Coffee },
-              { label: 'Dormir y despertar mejor', icon: Moon },
-              { label: 'Rendir más en el trabajo', icon: Sparkles },
-              { label: 'Entender qué me pasa', icon: Brain },
+              { label: 'Antes de las 6:30', icon: AlarmClock },
+              { label: 'Entre 6:30 y 7:30', icon: AlarmClock },
+              { label: 'Entre 7:30 y 9:00', icon: AlarmClock },
+              { label: 'Después de las 9:00', icon: AlarmClock },
             ]}
             onSelect={(v) => {
-              setR((p) => ({ ...p, meta: v }));
+              setR((p) => ({ ...p, despertar: v }));
+              avanzar();
+            }}
+          />
+        )}
+
+        {paso === 'cafe' && (
+          <ChipStep
+            key="cafe"
+            pregunta="¿Cuántos cafés necesitas para aguantar el día?"
+            subcopy="Tu plan busca que dependas menos de esto"
+            opciones={[
+              { label: 'Ninguno, pero me cuesta enfocarme', icon: Coffee },
+              { label: '1 a 2 tazas', icon: Coffee },
+              { label: '3 o más — modo supervivencia', icon: Coffee },
+            ]}
+            onSelect={(v) => {
+              setR((p) => ({ ...p, cafe: v }));
               avanzar();
             }}
           />
@@ -183,7 +205,7 @@ export default function OnboardingPage() {
             key="reconocimiento2"
             icon={Sparkles}
             titulo="Tus respuestas te describen"
-            texto="Pocos definen su horario, su meta y su hora de desconexión antes de empezar. Tu plan usa exactamente esa disciplina — solo le faltaba el número exacto."
+            texto="Pocos definen su meta, su horario y su hora de desconexión antes de empezar. Tu plan usa exactamente esa disciplina — solo le faltaba el número exacto."
             onContinuar={avanzar}
           />
         )}
@@ -192,8 +214,8 @@ export default function OnboardingPage() {
           <LoadingStep
             key="cargando"
             lineas={[
-              { texto: `Analizando tu hora de despertar: ${r.despertar ?? '—'}` },
-              { texto: `Registrando tus horas de anoche: ${(r.horasDormidas ?? 6).toFixed(1)}h` },
+              { texto: `Analizando tu meta: ${r.meta ?? '—'}` },
+              { texto: `Registrando tu promedio de sueño: ${(r.horasDormidas ?? 6).toFixed(1)}h/noche` },
               { texto: 'Calculando tu deuda de sueño' },
               { texto: `Armando tu plan de 3 días hasta las ${r.desconexion ?? '22:00'}` },
             ]}
@@ -214,11 +236,12 @@ export default function OnboardingPage() {
   );
 }
 
-// Cálculo real (no inventado) a partir del único dato duro que el usuario dio esta sesión:
-// deuda = déficit de anoche frente a 8h, proyectado a 3 noches — el mismo horizonte del
-// Plan de 3 Días. Se ajusta con historial real en cuanto exista persistencia (25).
-function calcularDeuda(horasDormidas: number): number {
-  const deficitAnoche = Math.max(0, 8 - horasDormidas);
-  const estimado = deficitAnoche * 2.8;
+// Cálculo real (no inventado) a partir del dato duro que el usuario dio: su PROMEDIO de
+// horas dormidas de la última semana (no una sola noche — la deuda de sueño se acumula
+// en días, no en una noche) frente a las 8h de referencia. Se ajusta con historial real
+// en cuanto exista persistencia (25).
+function calcularDeuda(promedioHorasDormidas: number): number {
+  const deficitPromedio = Math.max(0, 8 - promedioHorasDormidas);
+  const estimado = deficitPromedio * 2.8;
   return Math.min(10, Math.max(0.5, Number(estimado.toFixed(1))));
 }

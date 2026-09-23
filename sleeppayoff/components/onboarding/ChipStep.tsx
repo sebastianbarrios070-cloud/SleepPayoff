@@ -54,14 +54,16 @@ export function InputHorasStep({
 
   return (
     <StepShell>
-      <PreguntaTitulo>¿Cuántas horas dormiste anoche?</PreguntaTitulo>
+      <PreguntaTitulo subcopy="No una sola noche: la deuda se acumula en días">
+        En promedio, ¿cuántas horas dormiste esta última semana?
+      </PreguntaTitulo>
       <div className="flex flex-col items-center py-8">
         <p
           className="text-5xl font-bold tabular-nums text-[var(--text-primary)] [font-family:var(--font-display)]"
         >
           {horas.toFixed(1)}
         </p>
-        <p className="mt-1 text-sm font-semibold text-[var(--text-secondary)]">horas</p>
+        <p className="mt-1 text-sm font-semibold text-[var(--text-secondary)]">horas/noche</p>
         <input
           type="range"
           min={3}
@@ -70,7 +72,7 @@ export function InputHorasStep({
           value={horas}
           onChange={(e) => setHoras(Number(e.target.value))}
           className="mt-8 w-full accent-[var(--accent)]"
-          aria-label="Horas dormidas anoche"
+          aria-label="Promedio de horas dormidas esta semana"
         />
         <div className="mt-2 flex w-full justify-between text-xs text-[var(--text-tertiary)]">
           <span>3h</span>

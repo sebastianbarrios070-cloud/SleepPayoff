@@ -118,7 +118,7 @@ export function ResultStep({
           <TrendingDown size={20} color="var(--accent)" />
         </span>
         <div>
-          <p className="text-sm font-bold text-[var(--text-primary)]">Tu plan de 3 días ya está listo</p>
+          <p className="text-sm font-bold text-[var(--text-primary)]">Tu plan de 3 días para pagar esas {deudaHoras.toFixed(1)}h</p>
           <p className="mt-0.5 text-xs text-[var(--text-secondary)]">Siestas y horarios calculados con tus propios datos</p>
         </div>
       </motion.div>
