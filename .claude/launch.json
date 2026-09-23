@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "sleeppayoff",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "sleeppayoff", "run", "dev"],
+      "port": 3000
+    }
+  ]
+}

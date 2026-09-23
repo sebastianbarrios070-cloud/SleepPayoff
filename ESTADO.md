@@ -32,7 +32,9 @@
 
 ## Etapa actual
 
-Paso 1 de la secuencia maestra (página de ventas). FICHA-MODELO.md y FICHA-AVATAR.md aprobadas. Usuario eligió Opción A "Deuda Clara" en el protocolo A/B/C; pidió un ajuste (trial de 7→2 días) ya aplicado en [vista-previa-app.html](vista-previa-app.html). Pendiente: mostrar el tour ajustado y su confirmación final (me encanta / otro ajuste) para cerrar FICHA-ARTE.md y pasar a tematizar tokens.css + escribir el copy marcado.
+Paso 1 de la secuencia maestra (página de ventas) — **landing construida y funcionando**. FICHA-MODELO.md, FICHA-AVATAR.md y FICHA-ARTE.md aprobadas (Opción A "Deuda Clara", 2 ajustes de precio/trial confirmados por el usuario). Proyecto Next.js escalonado en `sleeppayoff/` (Next 16, React 19, Tailwind v4, motion, lucide-react). Landing compuesta desde el kit canónico con copy en `sleeppayoff/docs/copy/landing.md`, tokens tematizados en `sleeppayoff/components/landing/tokens.css`. 4 páginas legales creadas (privacidad, términos, reembolsos, aviso-ia) con datos del responsable (Juan Sebastián Barrios Avilés, México, sebastianbarrios070@gmail.com). Build + typecheck limpios, verificado en navegador (`npm run dev` vía `.claude/launch.json`).
+
+Próximo paso: Paso 2 de la secuencia maestra — onboarding.
 
 ## Registro anti-repetición (para no reciclar en el próximo proyecto de este usuario)
 - Nombre elegido: SleepPayoff.
@@ -47,4 +49,6 @@ Paso 1 de la secuencia maestra (página de ventas). FICHA-MODELO.md y FICHA-AVAT
 ## Problemas conocidos
 
 - FICHA-MODELO.md §6 (ángulos de ads): no se pudieron obtener los 5 ads individuales de Meta Ads Library con fecha de inicio exacta (sin navegador autenticado en esta sesión). Se documentaron datos agregados (formatos, volumen semanal) con fuente y fecha. Revisar con acceso a Meta Ads Library antes de definir los ads propios en la etapa `34-ADQUISICION`.
-- ~~**vista-previa**: `vista-previa-app.html` ausente~~ — RESUELTO: usuario eligió Opción A, tour construido ([vista-previa-app.html](vista-previa-app.html), screenshot en docs/revisiones/). FICHA-ARTE.md sigue en estado "pendiente aprobación del tour" hasta que el usuario responda 1/2/3 a la pregunta del tour.
+- ~~**vista-previa**: `vista-previa-app.html` ausente~~ — RESUELTO: usuario eligió Opción A, aprobó el tour tras 2 ajustes. FICHA-ARTE.md cerrada (aprobada: SÍ).
+- **docs/copy**: páginas legales son un BORRADOR redactado por el agente (47-LEGAL-FISCAL-Y-PRIVACIDAD.md permite esto para no bloquear la landing), no revisado por un abogado. ⚠️ Recomendado antes de vender a escala: revisión legal local (México).
+- **FICHA-MERCADO**: no se creó una ficha dedicada — la investigación de mercado vive en ESTADO.md (RESUMEN FINAL pegado por el usuario) y en FICHA-MODELO.md/FICHA-AVATAR.md, que ya la citan con fuentes. Se documenta acá por si un gate futuro la busca como archivo aparte.

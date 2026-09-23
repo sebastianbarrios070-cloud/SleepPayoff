@@ -33,7 +33,7 @@
 
 ## Brand kit final
 - Fondo: #0A0A10 (casi negro, tomado de RISE) · Superficie: #16161F · Hundido: #0D0D13 · Texto 1º/2º: #F5F5F7 / #9A9AA5
-- Acento: degradé #FF7A45 → #7C4DFF (naranja→violeta, de RISE) — SOLO en: cifra de resultado, CTA principal, línea de horizonte (divisor) · 2ª nota: #34D399 (verde menta) — porqué: marca "energía recuperada / plan completado" y diferencia a SleepPayoff de RISE, que no usa verde como semántico
+- Acento: #FF7A45 (naranja, de RISE) · 2ª nota: #7C4DFF (violeta) — juntos forman el degradé naranja→violeta usado en la cifra de resultado, el CTA principal y la línea de horizonte (divisor). Confirmado así en el tour aprobado (vista-previa-app.html): las 4 pantallas solo usan este par, sin verde — la nota verde propuesta inicialmente se descarta por no aparecer en ninguna pantalla aprobada.
 - Semánticos: éxito #34D399 · error #FF5C5C · aviso #FFC24B
 - Display: Space Grotesk (pesos 500/700) · Body: Inter (pesos 400/500/600) · Escala: display 40px / title 24px / body 16px / label 13px
 - Radio: 16px · Profundidad: sombras tintadas del color del elemento (no gris neutro) — tomado de Fabulous · Espaciado base: 4·8·12·16·24·32·48·64
@@ -44,9 +44,9 @@
 - Ruta de diseño: propuesta propia (fusión de líderes, sin referencia del usuario)
 - Protocolo A/B/C: opción elegida **A — "Deuda Clara"** · descartadas: B "Recupero" (fusión Fabulous/verde menta/anillo), C "Bitácora" (fusión editorial serif/timeline) · página comparativa: [direcciones-abc.html](direcciones-abc.html) · screenshot: [docs/revisiones/direcciones-abc.png](docs/revisiones/direcciones-abc.png)
 - Réplica fiel: N/A — no hubo referencia-mandato
-- Tour de la app: [vista-previa-app.html](vista-previa-app.html) · vistas: M0/Hoy, onboarding (pregunta de quiz), paywall (anual/mensual), mecanismo (plan de 3 días) · screenshot: [docs/revisiones/vista-previa-app.png](docs/revisiones/vista-previa-app.png) · aprobado por el usuario: pendiente (se presenta en este mensaje)
+- Tour de la app: [vista-previa-app.html](vista-previa-app.html) · vistas: M0/Hoy, onboarding (pregunta de quiz), paywall (anual/mensual), mecanismo (plan de 3 días) · screenshot: [docs/revisiones/vista-previa-app.png](docs/revisiones/vista-previa-app.png) · aprobado por el usuario: SÍ (2026-09-22, tras 2 ajustes: trial 7→2 días, precio $6.99/$39.99→$5.00/$36.00)
 - Paleta derivada de: RISE (líder de origen, tomada tal cual, doctrina 29) · Dispositivo ownable elegido: línea de horizonte degradé
 - Registro anti-repetición: paleta oscura naranja→violeta + Space Grotesk/Inter — anotado en ESTADO.md, vetado para el próximo proyecto de este usuario
 - Modo (claro/oscuro) DERIVADO por: lógica de color del líder #1 (RISE) + coherencia con el momento de uso del avatar (mañana temprano agotado / noche antes de dormir — el oscuro refuerza el contexto, no es un default estético)
 
-## Idioma UI: español (LATAM neutro, tuteo) · Fecha de cierre: 2026-09-22 · Aprobada por el usuario: pendiente
+## Idioma UI: español (LATAM neutro, tuteo) · Fecha de cierre: 2026-09-22 · Aprobada por el usuario: SÍ

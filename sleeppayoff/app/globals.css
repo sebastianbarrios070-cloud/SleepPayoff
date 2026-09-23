@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "../components/landing/tokens.css";
+
+body {
+  font-family: var(--font-body);
+}
