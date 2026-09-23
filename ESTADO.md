@@ -15,7 +15,7 @@
   2. Generador de plan de recuperación de 3 días (siestas estratégicas + hora de desconexión).
   3. Indicador de impacto en productividad/energía diaria.
   - **NO construir todavía:** grabador de ronquidos, catálogo de música/meditaciones, sincronización con wearables.
-- **Campo 15 — precio y modelo:** $6.99/mes o $39.99/año (35% más barato que competencia), 7 días de prueba gratis. Pasarela: Stripe.
+- **Campo 15 — precio y modelo:** $6.99/mes o $39.99/año (35% más barato que competencia), **2 días de prueba gratis** (ajustado por el usuario 2026-09-22, el RESUMEN FINAL original proponía 7). Pasarela: Stripe.
 - **Campo 16 — costo por cliente:** ~$0.05 USD/mes infra/IA. Margen ~99%.
 - **Campo 18 — las 3 tomas del video (30s):**
   1. 0s: "Deuda de sueño: 8.5 horas. Tu cerebro está funcionando al 60%."
@@ -32,7 +32,7 @@
 
 ## Etapa actual
 
-Paso 1 de la secuencia maestra (página de ventas). FICHA-MODELO.md y FICHA-AVATAR.md aprobadas. Usuario eligió Opción A "Deuda Clara" en el protocolo A/B/C. Tour de la app construido: [vista-previa-app.html](vista-previa-app.html) — pendiente respuesta del usuario (me encanta / ajustar / repensar) para cerrar FICHA-ARTE.md definitivamente y pasar a tematizar tokens.css + escribir el copy marcado.
+Paso 1 de la secuencia maestra (página de ventas). FICHA-MODELO.md y FICHA-AVATAR.md aprobadas. Usuario eligió Opción A "Deuda Clara" en el protocolo A/B/C; pidió un ajuste (trial de 7→2 días) ya aplicado en [vista-previa-app.html](vista-previa-app.html). Pendiente: mostrar el tour ajustado y su confirmación final (me encanta / otro ajuste) para cerrar FICHA-ARTE.md y pasar a tematizar tokens.css + escribir el copy marcado.
 
 ## Registro anti-repetición (para no reciclar en el próximo proyecto de este usuario)
 - Nombre elegido: SleepPayoff.

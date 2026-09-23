@@ -22,7 +22,7 @@
 ## 4. EL PLANO DE PRODUCTO
 - Onboarding: preguntas sobre hábitos de sueño, movimiento diario y niveles de energía, explica ritmo circadiano y cómo se calcula la deuda de sueño, termina en paywall. Nº exacto de pasos: NO ENCONTRADO con precisión (fuentes hablan de "serie de preguntas", Appllama documenta 35 pantallas de onboarding sin desglose público).
 - Momento del paywall: al finalizar el cuestionario, antes de mostrar el resultado completo (paywall post-cuestionario, pre-resultado detallado). Fuente: [RISE App Review — risescience.com](https://www.risescience.com/blog/rise-app-review).
-- Pricing: $69.99/año tras 7 días de prueba gratis; también existen plan mensual y "lifetime". Fuente: [RISE App Review](https://www.risescience.com/blog/rise-app-review), 2026.
+- Pricing (del MODELO, RISE): $69.99/año tras 7 días de prueba gratis; también existen plan mensual y "lifetime". Fuente: [RISE App Review](https://www.risescience.com/blog/rise-app-review), 2026. **Nota: SleepPayoff no copia esta duración de trial — ver ESTADO.md, el usuario decidió 2 días.**
 - Features CORE (las que enseña primero): deuda de sueño acumulada · Energy Schedule (timeline de energía del día) · hora de desconexión recomendada.
 - Features accesorias: integración con Apple Watch/wearables para tracking automático (existe pero es fuente de las quejas más fuertes — ver §5).
 
