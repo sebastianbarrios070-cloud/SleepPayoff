@@ -40,13 +40,16 @@ export function Agitacion({ frases, contraste, id }: AgitacionProps) {
       >
         <div className="flex flex-col gap-4">
           {frases.map((f, i) => (
-            <motion.p
-              key={i}
-              variants={item}
-              className="text-[17px] leading-[1.6] text-[var(--text-secondary)]"
-            >
-              <MarkedCopy text={f} />
-            </motion.p>
+            <motion.div key={i} variants={item} className="flex items-start gap-3">
+              <span
+                aria-hidden="true"
+                className="mt-2.5 h-2 w-2 shrink-0 rounded-full"
+                style={{ background: 'var(--accent)' }}
+              />
+              <p className="text-[17px] leading-[1.6] text-[var(--text-secondary)]">
+                <MarkedCopy text={f} />
+              </p>
+            </motion.div>
           ))}
         </div>
 

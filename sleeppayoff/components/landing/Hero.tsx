@@ -74,7 +74,7 @@ export function Hero({
             {appName}
           </a>
           {loginHref && (
-            <a href={loginHref} className="px-2 py-3 text-[14px] font-medium text-[var(--text-tertiary)]">
+            <a href={loginHref} className="px-2 py-3 text-[14px] font-medium text-[var(--text-secondary)]">
               {loginLabel}
             </a>
           )}

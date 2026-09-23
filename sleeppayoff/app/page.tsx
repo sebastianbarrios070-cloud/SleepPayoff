@@ -33,7 +33,7 @@ export default function LandingSleepPayoff() {
         logo={<LogoMark />}
         loginHref="/entrar"
         h1Marked="Sabe [acento]exactamente[/acento] cuándo desconectarte hoy"
-        subtitleMarked="30 segundos, cero sensores. [b]Calcula tu deuda de sueño[/b] y recibe tu plan de recuperación de 3 días."
+        subtitleMarked="30 segundos, cero sensores. [b]Calcula tu deuda de sueño[/b] y tu plan de 3 días."
         ctaLabel={CTA_LABEL}
         ctaHref={CTA_HREF}
         socialProof={<span>2 días gratis · sin reloj inteligente · cancela cuando quieras</span>}
@@ -42,7 +42,7 @@ export default function LandingSleepPayoff() {
           <img
             src="/mocks/hoy.png"
             alt="Pantalla Hoy de SleepPayoff: deuda de sueño de 6.3 horas y plan de 3 pasos"
-            className="mx-auto w-full max-w-[300px]"
+            className="mx-auto w-full max-w-xs"
           />
         }
       />
@@ -128,9 +128,9 @@ export default function LandingSleepPayoff() {
           ctaLabel: 'Calcular con el plan anual',
           ctaHref: `${CTA_HREF}?plan=anual`,
           features: [
-            'Cálculo diario de tu deuda de sueño',
-            'Plan de recuperación de 3 días',
-            'Hora exacta de desconexión cada noche',
+            'Tu deuda de sueño, calculada cada día',
+            'Plan de recuperación de 3 días, ilimitado',
+            'Hora exacta de desconexión, cada noche',
             'Registro 100% manual, sin wearables',
           ],
         }}
@@ -140,10 +140,10 @@ export default function LandingSleepPayoff() {
           ctaLabel: 'Calcular con el plan mensual',
           ctaHref: `${CTA_HREF}?plan=mensual`,
           features: [
-            'Cálculo diario de tu deuda de sueño',
+            'Cálculo de tu deuda de sueño, todos los días',
             'Plan de recuperación de 3 días',
-            'Hora exacta de desconexión cada noche',
-            'Cancelas cuando quieras',
+            'Tu hora de desconexión, lista cada noche',
+            'Cancelas cuando quieras, sin llamadas',
           ],
         }}
       />
@@ -192,7 +192,7 @@ export default function LandingSleepPayoff() {
         ctaLabel={CTA_LABEL}
         ctaHref={CTA_HREF}
         recap="Garantía Cero Falsas Promesas · 2 días gratis"
-        psMarked="PS: SleepPayoff calcula tu deuda de sueño y te da un plan de 3 días para pagarla — sin wearables, sin teoría de fases REM. Hoy entras con 2 días gratis."
+        psMarked="PS: [b]sin wearables, sin teoría de fases REM[/b] — solo tu deuda de sueño y un plan de 3 días para pagarla. Hoy entras con [b]2 días gratis[/b]."
       />
 
       {/* 10. FOOTER LEGAL */}
