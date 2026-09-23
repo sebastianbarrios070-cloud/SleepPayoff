@@ -32,9 +32,9 @@
 
 ## Etapa actual
 
-Paso 1 de la secuencia maestra (página de ventas) — **landing construida y funcionando**. FICHA-MODELO.md, FICHA-AVATAR.md y FICHA-ARTE.md aprobadas (Opción A "Deuda Clara", 2 ajustes de precio/trial confirmados por el usuario). Proyecto Next.js escalonado en `sleeppayoff/` (Next 16, React 19, Tailwind v4, motion, lucide-react). Landing compuesta desde el kit canónico con copy en `sleeppayoff/docs/copy/landing.md`, tokens tematizados en `sleeppayoff/components/landing/tokens.css`. 4 páginas legales creadas (privacidad, términos, reembolsos, aviso-ia) con datos del responsable (Juan Sebastián Barrios Avilés, México, sebastianbarrios070@gmail.com). Build + typecheck limpios, verificado en navegador (`npm run dev` vía `.claude/launch.json`).
+Paso 1 de la secuencia maestra (página de ventas) — **landing en construcción, NO LISTA todavía** (gate del revisor-visual pendiente de cruzar — ver "Problemas conocidos" → veredicto:landing). Compila, tipa limpio y se ve/funciona en el navegador, pero el veredicto formal sigue en NO LISTA (33/40 usabilidad de 36 requeridos, 15/20 craft de 16 requeridos; copy ya en 19/20). FICHA-MODELO.md, FICHA-AVATAR.md y FICHA-ARTE.md aprobadas (Opción A "Deuda Clara", 2 ajustes de precio/trial confirmados por el usuario). Proyecto Next.js escalonado en `sleeppayoff/` (Next 16, React 19, Tailwind v4, motion, lucide-react). Landing compuesta desde el kit canónico con copy en `sleeppayoff/docs/copy/landing.md`, tokens tematizados en `sleeppayoff/components/landing/tokens.css`. 4 páginas legales creadas (privacidad, términos, reembolsos, aviso-ia) con datos del responsable (Juan Sebastián Barrios Avilés, México, sebastianbarrios070@gmail.com).
 
-Próximo paso: Paso 2 de la secuencia maestra — onboarding.
+Próximo paso: esperando que el usuario elija entre (A) 7ª ronda de revisor-visual, (B) revisión manual del usuario, (C) avanzar al Paso 2 (onboarding) y volver a pulir la landing al final.
 
 ## Registro anti-repetición (para no reciclar en el próximo proyecto de este usuario)
 - Nombre elegido: SleepPayoff.
