@@ -58,10 +58,28 @@ function OnboardingFlow() {
   const [indice, setIndice] = useState(0);
   const [r, setR] = useState<Respuestas>({});
   const [confirmandoSalir, setConfirmandoSalir] = useState(false);
+  const [puntos, setPuntos] = useState(0);
+  const [errorPlan, setErrorPlan] = useState(false);
   const paso = PASOS[indice];
 
   const avanzar = (): void => setIndice((i) => Math.min(i + 1, PASOS.length - 1));
   const retroceder = (): void => setIndice((i) => Math.max(i - 1, 0));
+  // +10 pts por cada decisión real que toma el usuario (las 7 preguntas del flujo,
+  // no los reconocimientos). Puntuación cuantitativa, sin confeti — ver PuntosBadge.
+  const responder = <K extends keyof Respuestas>(campo: K, valor: Respuestas[K]): void => {
+    setR((p) => ({ ...p, [campo]: valor }));
+    setPuntos((p) => p + 10);
+    avanzar();
+  };
+
+  const irAlPaywall = (): void => {
+    setErrorPlan(false);
+    try {
+      router.push(planPreseleccionado ? `/paywall?plan=${planPreseleccionado}` : '/paywall');
+    } catch {
+      setErrorPlan(true);
+    }
+  };
 
   const deuda = calcularDeuda(r.horasDormidas ?? 6);
 
@@ -80,6 +98,7 @@ function OnboardingFlow() {
             total={PASOS.length - 2}
             onBack={indice > 0 ? retroceder : undefined}
             onExit={() => setConfirmandoSalir(true)}
+            puntos={puntos}
           />
         </div>
       )}
@@ -102,10 +121,8 @@ function OnboardingFlow() {
               { label: 'Dejar de posponer la alarma', icon: AlarmClock },
               { label: 'Entender qué me pasa', icon: Brain },
             ]}
-            onSelect={(v) => {
-              setR((p) => ({ ...p, meta: v }));
-              avanzar();
-            }}
+            onSelect={(v) => responder('meta', v)}
+            valorActual={r.meta}
           />
         )}
 
@@ -120,10 +137,8 @@ function OnboardingFlow() {
               { label: 'Todo el día', icon: Brain },
               { label: 'No estoy seguro', icon: Brain },
             ]}
-            onSelect={(v) => {
-              setR((p) => ({ ...p, neblina: v }));
-              avanzar();
-            }}
+            onSelect={(v) => responder('neblina', v)}
+            valorActual={r.neblina}
           />
         )}
 
@@ -148,10 +163,8 @@ function OnboardingFlow() {
               { label: 'Café o suplementos', icon: Coffee },
               { label: 'Nada todavía', icon: HeartPulse },
             ]}
-            onSelect={(v) => {
-              setR((p) => ({ ...p, probado: v }));
-              avanzar();
-            }}
+            onSelect={(v) => responder('probado', v)}
+            valorActual={r.probado}
           />
         )}
 
@@ -166,10 +179,8 @@ function OnboardingFlow() {
               { label: 'Entre 7:30 y 9:00', icon: AlarmClock },
               { label: 'Después de las 9:00', icon: AlarmClock },
             ]}
-            onSelect={(v) => {
-              setR((p) => ({ ...p, despertar: v }));
-              avanzar();
-            }}
+            onSelect={(v) => responder('despertar', v)}
+            valorActual={r.despertar}
           />
         )}
 
@@ -183,31 +194,17 @@ function OnboardingFlow() {
               { label: '1 a 2 tazas', icon: Coffee },
               { label: '3 o más — modo supervivencia', icon: Coffee },
             ]}
-            onSelect={(v) => {
-              setR((p) => ({ ...p, cafe: v }));
-              avanzar();
-            }}
+            onSelect={(v) => responder('cafe', v)}
+            valorActual={r.cafe}
           />
         )}
 
         {paso === 'horas' && (
-          <InputHorasStep
-            key="horas"
-            onContinuar={(h) => {
-              setR((p) => ({ ...p, horasDormidas: h }));
-              avanzar();
-            }}
-          />
+          <InputHorasStep key="horas" onContinuar={(h) => responder('horasDormidas', h)} />
         )}
 
         {paso === 'desconexion' && (
-          <DesconexionStep
-            key="desconexion"
-            onFijar={(h) => {
-              setR((p) => ({ ...p, desconexion: h }));
-              avanzar();
-            }}
-          />
+          <DesconexionStep key="desconexion" onFijar={(h) => responder('desconexion', h)} />
         )}
 
         {paso === 'reconocimiento2' && (
@@ -238,9 +235,9 @@ function OnboardingFlow() {
             key="resultado"
             deudaHoras={deuda}
             horaDesconexion={r.desconexion ?? '22:00'}
-            onVerPlan={() =>
-              router.push(planPreseleccionado ? `/paywall?plan=${planPreseleccionado}` : '/paywall')
-            }
+            onVerPlan={irAlPaywall}
+            error={errorPlan}
+            puntos={puntos}
           />
         )}
       </AnimatePresence>

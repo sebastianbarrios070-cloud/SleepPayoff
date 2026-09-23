@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
-import { Moon, TrendingDown } from 'lucide-react';
+import { Moon, TrendingDown, ShieldCheck } from 'lucide-react';
 import { FooterCta, PrimaryButton } from './OnboardingUI';
 
 // La primera victoria (regla 6 de 02B): el resultado real, calculado con las
@@ -11,10 +11,14 @@ export function ResultStep({
   deudaHoras,
   horaDesconexion,
   onVerPlan,
+  error,
+  puntos,
 }: {
   deudaHoras: number;
   horaDesconexion: string;
   onVerPlan: () => void;
+  error?: boolean;
+  puntos?: number;
 }) {
   const reduce = useReducedMotion();
   const [contado, setContado] = useState(reduce ? deudaHoras : 0);
@@ -39,7 +43,7 @@ export function ResultStep({
   }, [deudaHoras, reduce]);
 
   return (
-    <div className="flex flex-1 flex-col justify-start px-5 pt-6 pb-10">
+    <div className="flex flex-1 flex-col justify-center px-5 pt-6 pb-10">
       <motion.p
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -55,6 +59,16 @@ export function ResultStep({
       >
         Tu deuda de sueño de hoy
       </motion.h1>
+      {puntos !== undefined && (
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.12 }}
+          className="mt-1 text-center text-xs text-[var(--text-tertiary)]"
+        >
+          Perfil completo — {puntos} pts de precisión
+        </motion.p>
+      )}
       <div
         aria-hidden="true"
         className="mx-auto mt-3 h-1 w-16 rounded-full"
@@ -73,7 +87,7 @@ export function ResultStep({
         style={{
           borderColor: 'transparent',
           background:
-            'linear-gradient(var(--surface), var(--surface)) padding-box, linear-gradient(135deg, var(--accent), var(--accent-2, var(--accent))) border-box',
+            'linear-gradient(var(--surface), var(--surface)) padding-box, linear-gradient(90deg, var(--accent), var(--accent-2, var(--accent))) border-box',
           borderWidth: 1.5,
           boxShadow: listo ? '0 0 32px -4px color-mix(in oklab, var(--accent) 45%, transparent)' : undefined,
         }}
@@ -82,7 +96,8 @@ export function ResultStep({
           className="text-6xl font-bold tabular-nums"
           style={{
             fontFamily: 'var(--font-display)',
-            background: 'linear-gradient(90deg, var(--accent), var(--accent-2, var(--accent)))',
+            background:
+              'linear-gradient(90deg, var(--accent) 0%, var(--accent) 35%, var(--accent-2, var(--accent)) 100%)',
             WebkitBackgroundClip: 'text',
             backgroundClip: 'text',
             color: 'transparent',
@@ -123,8 +138,28 @@ export function ResultStep({
         </div>
       </motion.div>
 
-      <FooterCta pegadoAbajo={false}>
-        <PrimaryButton onClick={onVerPlan}>Ver mi plan completo</PrimaryButton>
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.55 }}
+        className="mt-3 flex items-center gap-3 rounded-[var(--radius-card)] bg-[var(--surface)] p-4"
+      >
+        <span className="flex size-11 shrink-0 items-center justify-center rounded-[var(--radius-button)] bg-[color-mix(in_oklab,var(--accent)_14%,transparent)]">
+          <ShieldCheck size={20} color="var(--accent)" />
+        </span>
+        <div>
+          <p className="text-sm font-bold text-[var(--text-primary)]">Sin wearables, sin fases REM</p>
+          <p className="mt-0.5 text-xs text-[var(--text-secondary)]">Solo tus datos reales — cero falsas promesas</p>
+        </div>
+      </motion.div>
+
+      <FooterCta>
+        {error && (
+          <p className="mb-3 text-center text-xs font-medium" style={{ color: '#ff5c5c' }}>
+            No pudimos abrir tu plan. Tus respuestas están guardadas — intenta de nuevo.
+          </p>
+        )}
+        <PrimaryButton onClick={onVerPlan}>{error ? 'Reintentar' : 'Ver mi plan completo'}</PrimaryButton>
       </FooterCta>
     </div>
   );

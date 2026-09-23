@@ -16,7 +16,9 @@ await page.waitForTimeout(500);
 await page.getByText('Nada todavía').click(); // probado
 await page.waitForTimeout(500);
 await page.getByText('Entre 6:30 y 7:30').click(); // despertar
-await page.waitForTimeout(500);
+await page.waitForTimeout(900);
+await page.screenshot({ path: '../docs/revisiones/onboarding-cafe-375.png' }); // paso cafe, 3 opciones
+
 await page.getByText('1 a 2 tazas').click(); // cafe
 await page.waitForTimeout(900);
 await page.screenshot({ path: '../docs/revisiones/onboarding-horas-375.png' });

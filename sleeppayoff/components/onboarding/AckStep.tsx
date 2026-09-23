@@ -52,7 +52,7 @@ export function AckStep({
           {texto}
         </motion.p>
       </div>
-      <FooterCta pegadoAbajo={false}>
+      <FooterCta>
         <PrimaryButton onClick={onContinuar}>Continuar</PrimaryButton>
       </FooterCta>
     </StepShell>

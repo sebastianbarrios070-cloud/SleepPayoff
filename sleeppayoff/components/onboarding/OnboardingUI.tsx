@@ -12,11 +12,13 @@ export function ProgressHeader({
   total,
   onBack,
   onExit,
+  puntos,
 }: {
   paso: number;
   total: number;
   onBack?: () => void;
   onExit?: () => void;
+  puntos?: number;
 }) {
   // Endowed progress (A2): nunca arranca en 0% — ya trae 8% de regalo.
   const pct = Math.round(8 + (paso / total) * 92);
@@ -44,18 +46,43 @@ export function ProgressHeader({
           {pct}%
         </span>
       </div>
-      {onExit && (
-        <div className="flex justify-end pt-2">
-          <button
-            type="button"
-            onClick={onExit}
-            className="px-2 py-1 text-xs font-medium text-[var(--text-tertiary)]"
-          >
-            Salir
-          </button>
+      {(onExit || puntos !== undefined) && (
+        <div className="flex items-center justify-between pt-2">
+          {puntos !== undefined ? <PuntosBadge puntos={puntos} /> : <span />}
+          {onExit && (
+            <button
+              type="button"
+              onClick={onExit}
+              className="px-2 py-1 text-xs font-medium text-[var(--text-tertiary)]"
+            >
+              Salir
+            </button>
+          )}
         </div>
       )}
     </div>
+  );
+}
+
+// Puntuación mientras avanza el cuestionario — cuantitativa, sin confeti ni
+// gamificación infantil (FICHA-ARTE.md: anti-sobre-gamificación, el avatar rechaza
+// lo decorativo). Un dato más, tratado como dato, no como logro de videojuego.
+function PuntosBadge({ puntos }: { puntos: number }) {
+  return (
+    <motion.span
+      key={puntos}
+      initial={{ scale: 1.15, opacity: 0.6 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+      className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold tabular-nums"
+      style={{
+        color: 'var(--accent)',
+        background: 'color-mix(in oklab, var(--accent) 12%, transparent)',
+        border: '1px solid color-mix(in oklab, var(--accent) 25%, transparent)',
+      }}
+    >
+      {puntos} pts
+    </motion.span>
   );
 }
 
@@ -67,7 +94,7 @@ export function StepShell({ children }: { children: ReactNode }) {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: reduce ? 0 : -24 }}
       transition={{ duration: reduce ? 0.15 : 0.3, ease: [0.16, 1, 0.3, 1] }}
-      className="flex flex-1 flex-col justify-start px-5 pt-6 pb-10"
+      className="flex flex-1 flex-col justify-center px-5 pt-6 pb-10"
     >
       {children}
     </motion.div>
@@ -115,7 +142,7 @@ export function ChipOption({
       type="button"
       whileTap={reduce ? undefined : { scale: 0.97 }}
       onClick={onClick}
-      className={`flex h-14 w-full items-center gap-3 rounded-[var(--radius-button)] border px-4 text-left transition-colors duration-150 ${
+      className={`flex min-h-14 w-full items-center gap-3 rounded-[var(--radius-button)] border px-4 py-3 text-left transition-colors duration-150 ${
         selected
           ? 'border-[var(--accent)] bg-[color-mix(in_oklab,var(--accent)_10%,transparent)]'
           : 'border-[color-mix(in_oklab,var(--text-tertiary)_22%,transparent)] bg-[var(--surface)]'
@@ -167,9 +194,12 @@ export function PrimaryButton({
   );
 }
 
-export function FooterCta({ children, pegadoAbajo = true }: { children: ReactNode; pegadoAbajo?: boolean }) {
+export function FooterCta({ children }: { children: ReactNode }) {
+  // Sin mt-auto a propósito: el padre centra TODO el bloque (título+contenido+footer)
+  // como una unidad con justify-center — así un paso corto no deja el CTA flotando
+  // lejos abajo, y uno largo sigue fluyendo con margen normal.
   return (
-    <div className={`${pegadoAbajo ? 'mt-auto' : 'mt-10'} pb-[max(20px,env(safe-area-inset-bottom))] pt-6`}>
+    <div className="mt-10 pb-[max(20px,env(safe-area-inset-bottom))] pt-6">
       {children}
     </div>
   );
