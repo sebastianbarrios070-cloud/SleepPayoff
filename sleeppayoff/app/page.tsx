@@ -33,7 +33,7 @@ export default function LandingSleepPayoff() {
         logo={<LogoMark />}
         loginHref="/entrar"
         h1Marked="Sabe [acento]exactamente[/acento] cuándo desconectarte hoy"
-        subtitleMarked="30 segundos, cero sensores. [b]Calcula tu deuda de sueño[/b] y tu plan de 3 días."
+        subtitleMarked="30 segundos, cero sensores. [b]Calcula tu deuda de sueño[/b] y plan de 3 días."
         ctaLabel={CTA_LABEL}
         ctaHref={CTA_HREF}
         socialProof={<span>2 días gratis · sin reloj inteligente · cancela cuando quieras</span>}
