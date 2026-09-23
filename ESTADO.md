@@ -15,7 +15,7 @@
   2. Generador de plan de recuperación de 3 días (siestas estratégicas + hora de desconexión).
   3. Indicador de impacto en productividad/energía diaria.
   - **NO construir todavía:** grabador de ronquidos, catálogo de música/meditaciones, sincronización con wearables.
-- **Campo 15 — precio y modelo:** $6.99/mes o $39.99/año (35% más barato que competencia), **2 días de prueba gratis** (ajustado por el usuario 2026-09-22, el RESUMEN FINAL original proponía 7). Pasarela: Stripe.
+- **Campo 15 — precio y modelo:** **$5.00/mes o $36.00/año ($3.00/mes, ahorra 40%)** — ajustado por el usuario 2026-09-22 (el RESUMEN FINAL original proponía $6.99/$39.99). **2 días de prueba gratis** (también ajustado, original proponía 7). Pasarela: Stripe.
 - **Campo 16 — costo por cliente:** ~$0.05 USD/mes infra/IA. Margen ~99%.
 - **Campo 18 — las 3 tomas del video (30s):**
   1. 0s: "Deuda de sueño: 8.5 horas. Tu cerebro está funcionando al 60%."

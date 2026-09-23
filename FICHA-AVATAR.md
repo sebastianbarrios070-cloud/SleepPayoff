@@ -51,7 +51,7 @@
 ## Objeciones reales (6, con respuesta y destino)
 1. "Ya probé apps de sueño y ninguna funciona, solo me dicen lo mal que dormí" → respuesta: mostrar el plan de acción concreto (hora exacta + siesta), no un puntaje → vive en: hero + sección de mecanismo de la landing
 2. "No quiero usar un reloj inteligente ni dejar el teléfono encendido toda la noche" → respuesta (validar + mecanismo): registro 100% manual, 30 segundos, sin sensores → vive en: sección de "cómo funciona" + FAQ
-3. "Es una suscripción más que voy a olvidar cancelar" → respuesta (precio/día + garantía): $6.99/mes ≈ $0.23/día, con 7 días de prueba gratis y cancelación simple → vive en: paywall + FAQ
+3. "Es una suscripción más que voy a olvidar cancelar" → respuesta (precio/día + garantía): $5.00/mes ≈ $0.17/día, con 2 días de prueba gratis y cancelación simple → vive en: paywall + FAQ
 4. "Es muy cara para solo darme un gráfico bonito" → respuesta (demo, no adjetivos): mostrar el resultado real (plan de 3 días) en el onboarding antes de pedir pago → vive en: onboarding + paywall
 5. Pago/checkout ("¿es seguro poner mi tarjeta?") → respuesta: Stripe como pasarela reconocida, sin guardar datos de tarjeta en la app → vive en: microcopy bajo CTA de compra + FAQ
 6. (la del nicho) "Mi horario de trabajo es caótico, esto solo funciona si duermo de 10 PM a 6 AM" → respuesta: el cálculo se adapta al horario que el usuario ingresa, no asume un horario fijo → vive en: FAQ + sección de mecanismo
@@ -65,4 +65,4 @@
 ## Cierre
 - INVENTARIO DE PRUEBA DÍA-1: sin activos propios de prueba aún (app no construida) — la landing usará demo real del cálculo (mock funcional) + garantía de 7 días, sin inventar testimonios, según regla del Paso 1 de `SECUENCIA-MAESTRA-CONSTRUCCION.md`
 - ¿Hubo entrevistas del 44?: NO — la ficha se deriva del RESUMEN FINAL validado (investigación de mercado ya realizada por el usuario) y de la FICHA-MODELO
-- Fecha de cierre: 2026-09-22 · Aprobada por el usuario: pendiente (se presenta en este mensaje)
+- Fecha de cierre: 2026-09-22 · Aprobada por el usuario: SÍ
