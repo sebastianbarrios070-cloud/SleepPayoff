@@ -92,6 +92,17 @@ export function Hero({
             <MarkedCopy text={h1Marked} />
           </h1>
 
+          {/* Dispositivo ownable de SleepPayoff (FICHA-ARTE.md): línea de horizonte degradé
+              naranja→violeta — desviación puntual del kit compartido, documentada en ESTADO.md */}
+          <div
+            aria-hidden="true"
+            className="mt-5 h-[5px] w-32 rounded-full"
+            style={{
+              background: 'linear-gradient(90deg, var(--accent), var(--accent-2))',
+              boxShadow: '0 0 16px 1px color-mix(in oklab, var(--accent) 55%, transparent)',
+            }}
+          />
+
           <p className="mt-4 max-w-[560px] text-[17px] leading-relaxed text-[var(--text-secondary)] md:text-[18px]">
             <MarkedCopy text={subtitulo} />
           </p>

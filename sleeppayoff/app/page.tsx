@@ -6,6 +6,8 @@
 
 import { AlarmClock, Brain, Coffee, Moon } from 'lucide-react';
 import { Hero } from '@/components/landing/Hero';
+import { LogoMark } from '@/components/landing/LogoMark';
+import { HorizonDivider } from '@/components/landing/HorizonDivider';
 import { Problema } from '@/components/landing/Problema';
 import { Agitacion } from '@/components/landing/Agitacion';
 import { Solucion } from '@/components/landing/Solucion';
@@ -28,13 +30,21 @@ export default function LandingSleepPayoff() {
       {/* 1. HERO */}
       <Hero
         appName="SleepPayoff"
+        logo={<LogoMark />}
         loginHref="/entrar"
         h1Marked="Sabe [acento]exactamente[/acento] cuándo desconectarte hoy"
         subtitleMarked="30 segundos, cero sensores. [b]Calcula tu deuda de sueño[/b] y recibe tu plan de recuperación de 3 días."
         ctaLabel={CTA_LABEL}
         ctaHref={CTA_HREF}
         socialProof={<span>2 días gratis · sin reloj inteligente · cancela cuando quieras</span>}
-        visualPlaceholderSugerencia="captura de la pantalla Hoy: deuda de sueño en grande + plan de 3 pasos"
+        visual={
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src="/mocks/hoy.png"
+            alt="Pantalla Hoy de SleepPayoff: deuda de sueño de 6.3 horas y plan de 3 pasos"
+            className="mx-auto w-full max-w-[300px]"
+          />
+        }
       />
 
       {/* 2. PROBLEMA */}
@@ -52,7 +62,7 @@ export default function LandingSleepPayoff() {
       <Agitacion
         frases={[
           'Cada semana pierdes horas de trabajo facturable por la neblina mental de la tarde.',
-          'En 1 año, ese cansancio acumulado son [acento]miles de dólares[/acento] en entregas tardías y errores.',
+          'Una tarea de 4 horas te toma [acento]el doble[/acento] cuando la neblina mental no te deja avanzar.',
           'Otra app que solo te dice que dormiste mal no lo arregla: [b]más gráficos no es más energía[/b].',
         ]}
         contraste={{
@@ -77,18 +87,19 @@ export default function LandingSleepPayoff() {
           labelAntes: 'Antes',
           antes: 'Adivinas por qué estás agotado a las 2 PM.',
           labelDespues: 'Después',
-          despues: 'Sabes la hora exacta para desconectarte y recuperar el 80% de tu energía mañana.',
+          despues: 'Sabes la hora exacta para desconectarte y despertar con la cabeza despejada.',
         }}
       />
+
+      <HorizonDivider />
 
       {/* 5. LA APP POR DENTRO */}
       <AppPorDentro
         tituloMarked="Tu día, [acento]ya calculado[/acento]"
         frames={[
-          { label: 'Tu deuda de sueño de hoy', nombrePantalla: 'Hoy' },
-          { label: 'Así te preguntamos al empezar', nombrePantalla: 'Onboarding' },
-          { label: 'Tu plan de 3 días en progreso', nombrePantalla: 'Plan' },
-          { label: 'Elige tu plan', nombrePantalla: 'Paywall' },
+          { src: '/mocks/onboarding.png', label: 'Así te preguntamos al empezar' },
+          { src: '/mocks/plan.png', label: 'Tu plan de 3 días en progreso' },
+          { src: '/mocks/paywall.png', label: 'Elige tu plan' },
         ]}
         ctaLabel={CTA_LABEL}
         ctaHref={CTA_HREF}
@@ -112,10 +123,10 @@ export default function LandingSleepPayoff() {
           badge: 'MÁS POPULAR',
           precioMes: '$3.00',
           totalAnual: 'Se cobra $36.00/año',
-          ahorro: 'Ahorra 40%',
+          ahorro: 'Ahorra 4 meses',
           descomposicionDia: 'menos de $0.10 al día',
-          ctaLabel: 'Empezar mis 2 días gratis',
-          ctaHref: CTA_HREF,
+          ctaLabel: 'Calcular con el plan anual',
+          ctaHref: `${CTA_HREF}?plan=anual`,
           features: [
             'Cálculo diario de tu deuda de sueño',
             'Plan de recuperación de 3 días',
@@ -126,8 +137,8 @@ export default function LandingSleepPayoff() {
         mensual={{
           nombre: 'Mensual',
           precioMes: '$5.00',
-          ctaLabel: 'Elegir mensual',
-          ctaHref: CTA_HREF,
+          ctaLabel: 'Calcular con el plan mensual',
+          ctaHref: `${CTA_HREF}?plan=mensual`,
           features: [
             'Cálculo diario de tu deuda de sueño',
             'Plan de recuperación de 3 días',
@@ -137,6 +148,8 @@ export default function LandingSleepPayoff() {
         }}
       />
 
+      <HorizonDivider />
+
       {/* 7. GARANTÍA */}
       <Garantia
         nombre="la Garantía Cero Falsas Promesas"
@@ -144,16 +157,18 @@ export default function LandingSleepPayoff() {
         pisoLegal="Cancelas y pides reembolso desde la app — el pago lo procesa Stripe, nunca guardamos tu tarjeta."
       />
 
+      <HorizonDivider />
+
       {/* 8. FAQ */}
       <Faq
         items={[
           {
-            pregunta: '¿Necesito un reloj inteligente o dejar el teléfono prendido toda la noche?',
-            respuestaMarked: 'No — [b]registro 100% manual[/b], 30 segundos por la mañana y 30 por la noche. Cero sensores.',
-          },
-          {
             pregunta: 'Ya probé apps de sueño y las abandono, ¿esto es distinto?',
             respuestaMarked: 'Sí: no te mostramos un gráfico bonito de lo mal que dormiste — te damos [b]la hora exacta[/b] para desconectarte hoy.',
+          },
+          {
+            pregunta: '¿Necesito un reloj inteligente o dejar el teléfono prendido toda la noche?',
+            respuestaMarked: 'No — [b]registro 100% manual[/b], 30 segundos por la mañana y 30 por la noche. Cero sensores.',
           },
           {
             pregunta: '¿Es una suscripción más que voy a olvidar cancelar?',
@@ -161,15 +176,11 @@ export default function LandingSleepPayoff() {
           },
           {
             pregunta: '¿Es seguro poner mi tarjeta?',
-            respuestaMarked: 'El pago lo procesa Stripe — nunca vemos ni guardamos el número de tu tarjeta.',
+            respuestaMarked: 'El pago lo procesa Stripe — [b]nunca vemos ni guardamos[/b] el número de tu tarjeta.',
           },
           {
             pregunta: 'Mi horario de trabajo es caótico, ¿igual funciona?',
             respuestaMarked: 'Sí — el cálculo [b]se adapta al horario que ingreses[/b], no asume que duermes de 10 PM a 6 AM.',
-          },
-          {
-            pregunta: '¿Cuánto tardo en ver resultados?',
-            respuestaMarked: 'Tu primer cálculo sale en 30 segundos. El plan de 3 días te muestra progreso [b]desde el día 1[/b].',
           },
         ]}
       />
@@ -187,6 +198,7 @@ export default function LandingSleepPayoff() {
       {/* 10. FOOTER LEGAL */}
       <FooterLegal
         appName="SleepPayoff"
+        logo={<LogoMark size={20} />}
         soporteEmail="soporte@sleeppayoff.app"
         enlaces={[
           { label: 'Privacidad', href: '/privacidad' },
