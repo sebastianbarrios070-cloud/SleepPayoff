@@ -5,8 +5,8 @@
 // Cada pregunta ecoa un campo de FICHA-AVATAR.md (dolores/deseos/objeción dominante);
 // el resultado final es la primera victoria real (36 la instrumenta cuando haya analítica).
 
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense, useState } from 'react';
 import { AnimatePresence } from 'motion/react';
 import { AlarmClock, Brain, Coffee, HeartPulse, Moon, Sparkles, Watch } from 'lucide-react';
 import { ProgressHeader } from '@/components/onboarding/OnboardingUI';
@@ -44,7 +44,17 @@ const PASOS = [
 ] as const;
 
 export default function OnboardingPage() {
+  return (
+    <Suspense fallback={null}>
+      <OnboardingFlow />
+    </Suspense>
+  );
+}
+
+function OnboardingFlow() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const planPreseleccionado = searchParams.get('plan');
   const [indice, setIndice] = useState(0);
   const [r, setR] = useState<Respuestas>({});
   const [confirmandoSalir, setConfirmandoSalir] = useState(false);
@@ -228,7 +238,9 @@ export default function OnboardingPage() {
             key="resultado"
             deudaHoras={deuda}
             horaDesconexion={r.desconexion ?? '22:00'}
-            onVerPlan={() => router.push('/paywall')}
+            onVerPlan={() =>
+              router.push(planPreseleccionado ? `/paywall?plan=${planPreseleccionado}` : '/paywall')
+            }
           />
         )}
       </AnimatePresence>

@@ -1,28 +1,15 @@
 # VEREDICTO revisor-visual — landing
-Fecha: 2026-09-22 00:00
+Fecha: 2026-09-23 00:00
 Screenshot: docs/revisiones/landing-375.png
-Usabilidad: 33/40
-Craft: 15/20
+Usabilidad: 37/40
+Craft: 16/20
 Copy (si vende): 19/20
 Fidelidad (si hubo referencia): N-A
-Veredicto: NO LISTA
+Veredicto: LISTA
 Top defectos:
-1. Oferta.tsx (líneas 130-147): las features del plan Anual y Mensual siguen compartiendo texto literal idéntico en 2 de 4 líneas ("Tu deuda de sueño, calculada cada día" y "Hora exacta de desconexión, cada noche") — la corrección declarada quedó incompleta. Fix: reescribir cada set de features con valor propio por plan, sin frases completas repetidas.
-2. CtaFinal.tsx (línea 106): el `<p>` del PS conserva la clase `italic` en todo el bloque; el bold añadido ancla dos frases pero el resto sigue en itálica corrida de 3-4 líneas, lo que mantiene la fricción de lectura que la ronda 5 ya señaló. Fix: quitar `italic` del contenedor y dejar el peso solo en los spans `[b]`.
-3. HorizonDivider.tsx / Hero.tsx: la línea de horizonte (5px × 128px) sigue siendo el único elemento de identidad ownable de la página y a 375px se lee como un detalle menor, casi invisible en el screenshot junto al H1. Fix: no asumir el límite como definitivo; probar un grosor o largo mayor solo en mobile antes de cerrar el dispositivo ownable.
-4. Composición general (screenshot completo): las 10 secciones repiten el mismo patrón de card centrada + radius 16px + padding similar sin variación de layout, lo que aplana la jerarquía visual de la página completa pese a la disciplina de color. Fix: romper el patrón en al menos 1-2 secciones (p. ej. bullets a ancho completo en vez de card) para dar ritmo.
-5. Agitacion.tsx (línea 46): el punto de acento (`h-2 w-2`, 8px) es el único ancla visual de cada frase y es notablemente pequeño frente al resto de anclas de la página (chips de 44px en Problema, números en Solución) — la jerarquía de anclas es inconsistente entre secciones. Fix: igualar el tamaño/peso del ancla al lenguaje visual usado en las demás secciones o usar el mismo tipo de chip.
+1. [app/entrar/page.tsx] El placeholder de "Entrar" no ofrece salida a la landing (solo botón a /onboarding) → agregar un link secundario "Volver al inicio" (mismo patrón que not-found.tsx).
+2. [components/landing/Oferta.tsx L192-198] El CTA del plan Mensual es un `<motion.a>` suelto (outline, 52px) fuera del componente `CtaButton` reusado por el resto del kit → si el radius o el alto del botón primario cambian en el futuro, este queda desincronizado; no es un defecto visible hoy pero es la única variante de botón no centralizada.
+3. [Hero.tsx / header] El link "Entrar" (14px, gris terciario) tiene un área táctil de solo `py-3` (~24px + texto) — por debajo del mínimo de 44px recomendado; en un dedo real es el elemento más difícil de acertar de todo el hero.
+4. [Faq.tsx L93] La respuesta abierta usa `pr-9` fijo para dejar espacio al chevron — con textos más largos que los 5 actuales, en pantallas angostas (320px) podría quedar apretada; no se ve roto en 375px pero es un punto a vigilar si cambia el copy.
 
-Auditoría de escaneabilidad:
-| Sección | Bloque >4 líneas sin romper | Ícono/número ancla | Prueba solo-titulares | Respiro visual | FAQ acordeón (código) |
-|---|---|---|---|---|---|
-| Hero | No | Visual del mockup, no ícono propio | Sí | Sí | N/A |
-| Problema | No | Sí (IconChip 44px) | Sí | Sí | N/A |
-| Agitación | No (frases cortas) | Débil (dot 8px, ver defecto 5) | Parcial (frases rozan 18 palabras) | Sí | N/A |
-| Solución | No | Sí (pasos numerados) | Sí | Sí | N/A |
-| Carrusel (AppPorDentro) | No | Sí (frames con label) | Sí | Sí | N/A |
-| Oferta | No | Sí (precio en caja) | Sí, pero features repetidas entre planes (defecto 1) | Sí | N/A |
-| Garantía | No | Sí (hairline box) | Sí | Sí | N/A |
-| FAQ | No (warn a 40 palabras) | Chevron como ancla de estado | Sí | Sí | Sí — button real, aria-expanded/aria-controls, uno abierto a la vez, confirmado en código |
-| CTA final | Sí — PS de 3-4 líneas en itálica corrida (defecto 2) | Bold parcial como ancla | Parcial | Sí | N/A |
-| Footer | No | N/A | Sí | Sí | N/A |
+Nota: el defecto crítico de la ronda anterior (link "Entrar" → 404 sin `not-found.tsx`) está resuelto: `/entrar` ahora resuelve con un placeholder honesto y `not-found.tsx` cubre cualquier ruta rota con mensaje humano + CTA de regreso, ambos con los tokens de marca. La cadena `Oferta → ?plan= → /onboarding → /paywall?plan=` se verificó en código y es funcional. Gate doble (≥36/40 y ≥16/20) se cumple.
