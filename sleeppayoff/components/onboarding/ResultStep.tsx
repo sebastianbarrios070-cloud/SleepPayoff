@@ -155,7 +155,7 @@ export function ResultStep({
 
       <FooterCta>
         {error && (
-          <p className="mb-3 text-center text-xs font-medium" style={{ color: '#ff5c5c' }}>
+          <p className="mb-3 text-center text-xs font-medium" style={{ color: 'var(--error)' }}>
             No pudimos abrir tu plan. Tus respuestas están guardadas — intenta de nuevo.
           </p>
         )}

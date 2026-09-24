@@ -75,7 +75,13 @@ function OnboardingFlow() {
   const irAlPaywall = (): void => {
     setErrorPlan(false);
     try {
-      router.push(planPreseleccionado ? `/paywall?plan=${planPreseleccionado}` : '/paywall');
+      const params = new URLSearchParams();
+      if (planPreseleccionado) params.set('plan', planPreseleccionado);
+      params.set('deuda', String(deuda));
+      params.set('desconexion', r.desconexion ?? '22:00');
+      params.set('puntos', String(puntos));
+      params.set('respuestas', String(Object.keys(r).length));
+      router.push(`/paywall?${params.toString()}`);
     } catch {
       setErrorPlan(true);
     }

@@ -31,6 +31,9 @@
   --accent: #ff7a45;           /* naranja — cifra de resultado, CTA principal */
   --accent-2: #7c4dff;         /* violeta — 2ª nota; juntos forman el degradé de la línea de horizonte */
 
+  /* ── SEMÁNTICOS (solo en su función, nunca decorativos — regla 60-30-10) ── */
+  --error: #ff5c5c;
+
   /* ── FORMA (radios del brand kit — UNO por rol, toda la página) ── */
   --radius-card: 16px;
   --radius-button: 12px;
