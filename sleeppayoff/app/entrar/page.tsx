@@ -20,6 +20,7 @@ import { crearClienteNavegador } from '@/lib/supabase/client';
 type Paso = 'correo' | 'codigo';
 
 const EMAIL_VALIDO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const LONGITUD_CODIGO = 8; // Verificado en producción — el token de Supabase no es de 6.
 
 export default function EntrarPage() {
   const router = useRouter();
@@ -68,8 +69,8 @@ export default function EntrarPage() {
 
   const confirmarCodigo = async (): Promise<void> => {
     if (cargando) return;
-    if (codigo.length !== 6) {
-      setError('Escribe los 6 dígitos de tu código');
+    if (codigo.length !== LONGITUD_CODIGO) {
+      setError(`Escribe los ${LONGITUD_CODIGO} dígitos de tu código`);
       setSacudida((s) => s + 1);
       return;
     }
@@ -78,7 +79,7 @@ export default function EntrarPage() {
     const { error: err } = await supabase.auth.verifyOtp({ email, token: codigo, type: 'email' });
     setCargando(false);
     if (err) {
-      setError('Código inválido — revisa los 6 dígitos o pide uno nuevo abajo');
+      setError('Código inválido — revisa los dígitos o pide uno nuevo abajo');
       setSacudida((s) => s + 1);
       return;
     }
@@ -202,7 +203,7 @@ export default function EntrarPage() {
               <Entra delay={0.08}>
                 <Sacudida activar={sacudida}>
                   <div className="mt-8 flex flex-col gap-4">
-                    <CodeInput value={codigo} onChange={setCodigo} disabled={cargando} />
+                    <CodeInput value={codigo} onChange={setCodigo} disabled={cargando} longitud={LONGITUD_CODIGO} />
                     {error && (
                       <p className="text-center text-xs font-medium" style={{ color: 'var(--error)' }}>
                         {error}

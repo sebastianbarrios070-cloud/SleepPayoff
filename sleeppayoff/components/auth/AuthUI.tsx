@@ -107,39 +107,44 @@ export function EmailField({
   );
 }
 
-// Combo de código de 6 dígitos (26-AUTH-MODERNO §MAGIC LINK/OTP): un dígito por
-// casilla, autoavanza y permite pegar el código completo de una vez.
+// Combo de código (26-AUTH-MODERNO §MAGIC LINK/OTP): un dígito por casilla,
+// autoavanza y permite pegar el código completo de una vez. Longitud real
+// del token que manda Supabase: 8 dígitos (verificado en producción).
 export function CodeInput({
   value,
   onChange,
   disabled,
+  longitud = 8,
 }: {
   value: string;
   onChange: (v: string) => void;
   disabled?: boolean;
+  longitud?: number;
 }) {
   const refs = useRef<(HTMLInputElement | null)[]>([]);
-  const digitos = value.padEnd(6, ' ').split('').slice(0, 6);
+  const digitos = value.padEnd(longitud, ' ').split('').slice(0, longitud);
 
   const setDigito = (i: number, d: string): void => {
     const limpio = d.replace(/[^0-9]/g, '').slice(-1);
-    const casillas = value.padEnd(6, ' ').split('');
+    const casillas = value.padEnd(longitud, ' ').split('');
     casillas[i] = limpio || ' ';
     onChange(casillas.join('').trimEnd());
-    if (limpio && i < 5) refs.current[i + 1]?.focus();
+    if (limpio && i < longitud - 1) refs.current[i + 1]?.focus();
   };
 
   const pegar = (e: React.ClipboardEvent<HTMLInputElement>): void => {
-    const texto = e.clipboardData.getData('text').replace(/[^0-9]/g, '').slice(0, 6);
+    const texto = e.clipboardData.getData('text').replace(/[^0-9]/g, '').slice(0, longitud);
     if (texto.length > 1) {
       e.preventDefault();
       onChange(texto);
-      refs.current[Math.min(texto.length, 5)]?.focus();
+      refs.current[Math.min(texto.length, longitud - 1)]?.focus();
     }
   };
 
+  const compacto = longitud > 6;
+
   return (
-    <div className="flex justify-center gap-2">
+    <div className="flex justify-center gap-1.5">
       {digitos.map((d, i) => (
         <input
           key={i}
@@ -154,7 +159,9 @@ export function CodeInput({
           onChange={(e) => setDigito(i, e.target.value)}
           onPaste={pegar}
           aria-label={`Dígito ${i + 1} del código`}
-          className="h-14 w-11 rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--text-tertiary)_28%,transparent)] bg-[var(--surface)] text-center text-xl font-bold tabular-nums text-[var(--text-primary)] outline-none transition-colors duration-150 focus:border-[var(--accent)] disabled:opacity-50"
+          className={`h-14 rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--text-tertiary)_28%,transparent)] bg-[var(--surface)] text-center font-bold tabular-nums text-[var(--text-primary)] outline-none transition-colors duration-150 focus:border-[var(--accent)] disabled:opacity-50 ${
+            compacto ? 'w-8 text-base' : 'w-11 text-xl'
+          }`}
         />
       ))}
     </div>
