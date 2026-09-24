@@ -5,15 +5,17 @@
 // Método elegido (ESTADO.md → Decisiones técnicas, decisión técnica interna, no se
 // le pregunta al usuario): magic link/OTP por email como primario — sin contraseña,
 // combo enlace+código en el mismo correo — + "Continuar con Google" como atajo.
-// Supabase Auth real se conecta en el Paso 6; aquí la UI es funcional con estado
-// local y mensajes anti-enumeración (nunca revela si el correo existe o no).
+// Supabase Auth real (Paso 6): `signInWithOtp` envía el combo enlace+código;
+// `verifyOtp` lo confirma. Mensajes anti-enumeración (nunca revela si el
+// correo existe o no — misma respuesta pase lo que pase).
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { AuthHeadline, CerrarButton, CodeInput, Divisor, EmailField, Entra, Girando, GoogleButton, Sacudida } from '@/components/auth/AuthUI';
 import { PrimaryButton } from '@/components/onboarding/OnboardingUI';
+import { crearClienteNavegador } from '@/lib/supabase/client';
 
 type Paso = 'correo' | 'codigo';
 
@@ -22,6 +24,7 @@ const EMAIL_VALIDO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export default function EntrarPage() {
   const router = useRouter();
   const reduce = useReducedMotion();
+  const supabase = useMemo(() => crearClienteNavegador(), []);
   const [paso, setPaso] = useState<Paso>('correo');
   const [email, setEmail] = useState('');
   const [codigo, setCodigo] = useState('');
@@ -37,7 +40,7 @@ export default function EntrarPage() {
     return () => clearTimeout(t);
   }, [cooldown]);
 
-  const enviarCodigo = (): void => {
+  const enviarCodigo = async (): Promise<void> => {
     if (cargando) return;
     if (!EMAIL_VALIDO.test(email)) {
       setError('Escribe un correo con formato válido (ej. tu@correo.com)');
@@ -46,16 +49,24 @@ export default function EntrarPage() {
     }
     setCargando(true);
     setError(null);
-    // Simulación local: Supabase `signInWithOtp` real se conecta en el Paso 6.
-    // Anti-enumeración (26): esta respuesta es SIEMPRE la misma, exista o no la cuenta.
-    setTimeout(() => {
-      setCargando(false);
-      setPaso('codigo');
-      setCooldown(30);
-    }, 700);
+    // Anti-enumeración (26): pase lo que pase, se avanza al paso del código —
+    // nunca se revela si el correo ya tenía cuenta o no.
+    const { error: err } = await supabase.auth.signInWithOtp({
+      email,
+      options: { shouldCreateUser: true },
+    });
+    setCargando(false);
+    if (err && err.status && err.status >= 500) {
+      // Solo errores de infraestructura real se muestran — nunca "correo no existe".
+      setError('No pudimos enviar el código — intenta de nuevo en un momento');
+      setSacudida((s) => s + 1);
+      return;
+    }
+    setPaso('codigo');
+    setCooldown(30);
   };
 
-  const confirmarCodigo = (): void => {
+  const confirmarCodigo = async (): Promise<void> => {
     if (cargando) return;
     if (codigo.length !== 6) {
       setError('Escribe los 6 dígitos de tu código');
@@ -64,18 +75,15 @@ export default function EntrarPage() {
     }
     setCargando(true);
     setError(null);
-    setTimeout(() => {
-      // Mock: el código "000000" simula un código incorrecto/expirado — la
-      // verificación real (`verifyOtp`) llega con Supabase en el Paso 6.
-      if (codigo === '000000') {
-        setCargando(false);
-        setError('Código inválido — revisa los 6 dígitos o pide uno nuevo abajo');
-        setSacudida((s) => s + 1);
-        return;
-      }
-      setCargando(false);
-      router.push('/app');
-    }, 600);
+    const { error: err } = await supabase.auth.verifyOtp({ email, token: codigo, type: 'email' });
+    setCargando(false);
+    if (err) {
+      setError('Código inválido — revisa los 6 dígitos o pide uno nuevo abajo');
+      setSacudida((s) => s + 1);
+      return;
+    }
+    router.push('/app');
+    router.refresh();
   };
 
   const reenviar = (): void => {
